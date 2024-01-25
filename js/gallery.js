@@ -94,15 +94,15 @@ function handleClick(event) {
     const modalImg = event.target.closest(".gallery__link").href;
     console.log(modalImg);
     
-    const instance = basicLightbox.create(`
-    <img class="gallery__image" src="${modalImg}" 
-                alt="${modalImg.description}" width="800" height="600"/>`)
-  instance.show();
+  //   const instance = basicLightbox.create(`
+  //   <img class="gallery__image" src="${modalImg}" 
+  //               alt="${modalImg.description}" width="800" height="600"/>`)
+  // instance.show();
 
-    // let gallery = new SimpleLightbox('.gallery__item a', { captionsData: "alt", captionDelay: 250, overlayOpacity: 0.5 });
-    // gallery.on('show.simpleLightbox', function () {
-    //     `
-    //     <img class="gallery__image" src="${images.original}"  alt="${images.description}">
-    //     `
-    // });
+    let gallery = new SimpleLightbox('.gallery__item a', { captionsData: "alt", captionDelay: 250, overlayOpacity: 0.5 });
+    gallery.on('show.simpleLightbox', function () {
+        `
+        <img class="gallery__image" src="${images.original}"  alt="${images.description}">
+        `
+    });
 }
