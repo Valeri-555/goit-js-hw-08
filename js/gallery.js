@@ -83,7 +83,7 @@ function createMarkup(arr) {
    </a>
 </li>`
     ).join("");
-}
+};
 
 function handleClick(event) {
   event.preventDefault()
@@ -109,21 +109,18 @@ const option = {
     },
   }
 modal.show();
-}
+};
     
 function handleKeyDown(event) {
   if (event.key === "Escape" || event.code === "Escape") {
     closeLightbox();
   };
   
-}
+};
 
 function closeLightbox() {
   if (lightbox && lightbox.visible()) {
     lightbox.close();
     document.removeEventListener("keydown", handleKeyDown)
   } 
-}
-// написати функцію та вставити в неї basicLightbox.create
-
-// function modal 
+};
