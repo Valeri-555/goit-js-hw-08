@@ -63,12 +63,13 @@ const images = [
     description: "Lighthouse Coast Sea",
   },
 ];
-console.log(images);
 
 const galleryList = document.querySelector(".gallery");
 
 galleryList.insertAdjacentHTML("beforeend", createMarkup(images));
 galleryList.addEventListener("click", handleClick);
+
+let lightbox;
 
 function createMarkup(arr) {
     return arr.map(({ preview, original, description }) =>
@@ -85,24 +86,44 @@ function createMarkup(arr) {
 }
 
 function handleClick(event) {
-    event.preventDefault()
+  event.preventDefault()
   
-    if (event.target === event.currentTarget) {
-        return;
-    }
+  if (event.target === event.currentTarget) {
+    return;
+  }
 
-    const modalImg = event.target.closest(".gallery__link").href;
-    console.log(modalImg);
-    
-  //   const instance = basicLightbox.create(`
-  //   <img class="gallery__image" src="${modalImg}" 
-  //               alt="${modalImg.description}" width="800" height="600"/>`)
-  // instance.show();
+  const modalImg = event.target.closest(".gallery__link").href;
+       
+  const instance = basicLightbox.create(
+    `<img src="${modalImg}" width="800" height="600" />`)
+  instance.show();
+};
 
-    let gallery = new SimpleLightbox('.gallery__item a', { captionsData: "alt", captionDelay: 250, overlayOpacity: 0.5 });
-    gallery.on('show.simpleLightbox', function () {
-        `
-        <img class="gallery__image" src="${images.original}"  alt="${images.description}">
-        `
-    });
+function modal() {
+const option = {
+    onShow: () => {
+      document.addEventListener('keydown', onModalClose);
+    },
+      onClose: () => {
+      document.removeEventListener('keydown', onModalClose);
+    },
+  }
+modal.show();
 }
+    
+function handleKeyDown(event) {
+  if (event.key === "Escape" || event.code === "Escape") {
+    closeLightbox();
+  };
+  
+}
+
+function closeLightbox() {
+  if (lightbox && lightbox.visible()) {
+    lightbox.close();
+    document.removeEventListener("keydown", handleKeyDown)
+  } 
+}
+// написати функцію та вставити в неї basicLightbox.create
+
+// function modal 
