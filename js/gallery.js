@@ -69,7 +69,6 @@ const galleryList = document.querySelector(".gallery");
 galleryList.insertAdjacentHTML("beforeend", createMarkup(images));
 galleryList.addEventListener("click", handleClick);
 
-let lightbox;
 
 function createMarkup(arr) {
     return arr.map(({ preview, original, description }) =>
@@ -78,7 +77,7 @@ function createMarkup(arr) {
       <img
       class="gallery__image"
       src="${preview}" 
-      data-source="large-image.jpg"
+      data-source="${original}"
       alt="${description}" />
    </a>
 </li>`
@@ -92,24 +91,22 @@ function handleClick(event) {
     return;
   }
 
-  const modalImg = event.target.closest(".gallery__link").href;
+  const modalImg = event.target.dataset.source;
        
   const instance = basicLightbox.create(
-    `<img src="${modalImg}" width="800" height="600" />`)
+    `<img src="${modalImg}" width="800" height="600" />`,
+    {
+      onShow: () => {
+        document.addEventListener('keydown', onModalClose);
+      },
+      onClose: () => {
+        document.removeEventListener('keydown', onModalClose);
+      },
+    }
+  )
   instance.show();
 };
 
-function modal() {
-const option = {
-    onShow: () => {
-      document.addEventListener('keydown', onModalClose);
-    },
-      onClose: () => {
-      document.removeEventListener('keydown', onModalClose);
-    },
-  }
-modal.show();
-};
     
 function handleKeyDown(event) {
   if (event.key === "Escape" || event.code === "Escape") {
