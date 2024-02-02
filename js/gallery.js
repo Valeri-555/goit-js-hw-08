@@ -92,17 +92,21 @@ function handleClick(event) {
   }
 
   const modalImg = event.target.dataset.source;
-       
+  console.log(modalImg);
+
+  const descrImg = event.target.getAttribute('alt');
+  console.log('опис', descrImg);
+  
   const instance = basicLightbox.create(
-    `<img src="${modalImg}" alt="${description}" width="800" height="600" />`,
-    {
-      onShow: (instance) => {
-        document.addEventListener('keydown', onModalShow);
-      },
-      onClose: (instance) => {
-        document.removeEventListener('keydown', onModalClose);
-      },
-    }
+    `<img src="${modalImg}" alt="${descrImg}" width="800" height="600" />`,
+    // {
+    //   onShow: (instance) => {
+    //     document.addEventListener('keydown', onModalShow);
+    //   },
+    //   onClose: (instance) => {
+    //     document.removeEventListener('keydown', onModalClose);
+    //   },
+    // }
   )
   instance.show();
 };
