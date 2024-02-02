@@ -99,21 +99,21 @@ function handleClick(event) {
   
   const instance = basicLightbox.create(
     `<img src="${modalImg}" alt="${descrImg}" width="800" height="600" />`,
-    // {
-    //   onShow: (instance) => {
-    //     document.addEventListener('keydown', onModalShow);
-    //   },
-    //   onClose: (instance) => {
-    //     document.removeEventListener('keydown', onModalClose);
-    //   },
-    // }
+    {
+      onShow: () => {
+        document.addEventListener('keydown', onModalClose);
+      },
+      onClose: () => {
+        document.removeEventListener('keydown', onModalClose);
+      },
+    }
   )
   instance.show();
 };
 
     
 function handleKeyDown(event) {
-  if (event.key === "Escape" || event.code === "Escape") {
+  if (event.key === "Escape") {
     closeLightbox();
   };
   
