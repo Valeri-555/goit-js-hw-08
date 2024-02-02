@@ -94,12 +94,12 @@ function handleClick(event) {
   const modalImg = event.target.dataset.source;
        
   const instance = basicLightbox.create(
-    `<img src="${modalImg}" width="800" height="600" />`,
+    `<img src="${modalImg}" alt="${description}" width="800" height="600" />`,
     {
-      onShow: () => {
-        document.addEventListener('keydown', onModalClose);
+      onShow: (instance) => {
+        document.addEventListener('keydown', onModalShow);
       },
-      onClose: () => {
+      onClose: (instance) => {
         document.removeEventListener('keydown', onModalClose);
       },
     }
@@ -121,3 +121,42 @@ function closeLightbox() {
     document.removeEventListener("keydown", handleKeyDown)
   } 
 };
+
+
+// function handleClick(event) {
+//   event.preventDefault()
+  
+//   if (event.target === event.currentTarget) {
+//     return;
+//   }
+
+//   const modalImg = event.target.dataset.source;
+       
+//   const instance = basicLightbox.create(
+//     `<img src="${modalImg}" width="800" height="600" />`,
+//     {
+//       onShow: (instance) => {
+//         document.addEventListener('keydown', onModalShow);
+//       },
+//       onClose: (instance) => {
+//         document.removeEventListener('keydown', onModalClose);
+//       },
+//     }
+//   )
+//   instance.show();
+// };
+
+    
+// function handleKeyDown(event) {
+//   if (event.key === "Escape" || event.code === "Escape") {
+//     closeLightbox();
+//   };
+  
+// };
+
+// function closeLightbox() {
+//   if (lightbox && lightbox.visible()) {
+//     lightbox.close();
+//     document.removeEventListener("keydown", handleKeyDown)
+//   } 
+// };
